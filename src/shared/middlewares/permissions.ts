@@ -1,18 +1,18 @@
 import { User } from "@modules/users/infra/typeorm/entities/User";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import { getRepository } from "typeorm";
 import AppError from '../errors/AppError';
 
 
 export function can(permissionsRoutes: string[]) {
-  return async (request: Request, response: Response, next: NextFunction) => {
+  return async (request: any, response: Response, next: NextFunction) => {
 
-    const userId = request.user.id;
+    const user_id = request.user.id;
 
     const userRepo = getRepository(User)
 
     const user = await userRepo.findOne({
-      where: { id: userId },
+      where: { id: user_id },
       relations: ["permissions"],
     });
 
@@ -33,14 +33,14 @@ export function can(permissionsRoutes: string[]) {
 }
 
 export function is(rolesRoutes: string[]) {
-  return async (request: Request, response: Response, next: NextFunction) => {
+  return async (request: any, response: Response, next: NextFunction) => {
 
-    const userId = request.user.id;
+    const user_id = request.user.id;
 
     const userRepo = getRepository(User)
 
     const user = await userRepo.findOne({
-      where: { id: userId },
+      where: { id: user_id },
       relations: ["roles"],
     });
 

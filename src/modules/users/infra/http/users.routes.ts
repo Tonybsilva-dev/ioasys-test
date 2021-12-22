@@ -1,7 +1,7 @@
 import UsersRepository from '@modules/users/repositories/UsersRepository';
 import CreateUserService from '@modules/users/services/CreateUserService';
 import ensureAuthenticated from '@shared/middlewares/ensureAuthenticated';
-import { Router, Request, Response } from 'express'
+import { Request, Response, Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 
 
@@ -37,4 +37,4 @@ userRouter.get('/', ensureAuthenticated, async (request: Request, response: Resp
 
 
 
-export { userRouter }
+export { userRouter };

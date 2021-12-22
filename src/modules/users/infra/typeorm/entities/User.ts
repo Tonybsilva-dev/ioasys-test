@@ -1,12 +1,10 @@
 import { randomUUID } from "crypto";
-
 import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
+    Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn
 } from 'typeorm';
+import { Permission } from "../../../../accessControlList/infra/typeorm/entities/Permission";
+import { Role } from "../../../../accessControlList/infra/typeorm/entities/Role";
+
 
 @Entity('users')
 class User {
@@ -31,6 +29,23 @@ class User {
   @UpdateDateColumn()
   updated_at: Date;
 
+  @ManyToMany(() => Role)
+  @JoinTable({
+    name: "users_roles",
+    joinColumns: [{ name: "user_id" }],
+    inverseJoinColumns: [{ name: "role_id" }],
+  })
+  roles: Role[];
+
+  @ManyToMany(() => Permission)
+  @JoinTable({
+    name: "users_permissions",
+    joinColumns: [{ name: "user_id" }],
+    inverseJoinColumns: [{ name: "permission_id" }],
+  })
+  permissions: Permission[];
+
+
   constructor() {
     if (!this.id) {
       this.id = randomUUID();
@@ -38,4 +53,4 @@ class User {
   }
 }
 
-export default User;
+export { User };

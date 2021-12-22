@@ -1,11 +1,11 @@
-import 'reflect-metadata';
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 import 'express-async-errors';
-import routes from './routes';
-import '../typeorm';
+import 'reflect-metadata';
+import { errorHandling } from '../../errors/ErrorHandling';
 import { logRequests } from '../../middlewares/logRequests';
-import { errorHandling } from '../../errors/ErrorHandling'
+import '../typeorm';
+import routes from './routes';
 
 
 const app = express();

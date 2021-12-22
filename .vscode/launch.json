@@ -6,7 +6,7 @@
         "request": "attach",
         "protocol": "inspector",
         "restart": true,
-        "name": "Debug",
+        "name": "Development",
         "skipFiles": [
           "<node_internals>/**"
         ],
